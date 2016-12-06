@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static android.content.Context.MODE_PRIVATE;
 
 /**
@@ -18,7 +21,7 @@ public class Configuracion {
     private final String key_temporizado="temporizado";
     private SharedPreferences preferencias;
     private SharedPreferences.Editor editorPreferencias;
-    //private Set<Object> memoria
+    List<Elemento> elementos = new ArrayList<>();
 
 
     /**
@@ -29,6 +32,13 @@ public class Configuracion {
         this.preferencias = context.getSharedPreferences(perfil, MODE_PRIVATE);
         this.editorPreferencias = this.preferencias.edit();
         recargarPreferencias();
+
+        //TODO sacar y usar una lista guardadoa
+
+        elementos.add(Elemento.CABALLO);
+        elementos.add(Elemento.MATRA);
+        elementos.add(Elemento.MONTURA);
+        elementos.add(Elemento.MONTURIN);
     }
 
     public Nivel getNivel() {
@@ -43,6 +53,10 @@ public class Configuracion {
 
     public boolean isTemporizado() {
         return temporizado;
+    }
+
+    public List<Elemento> getElementos() {
+        return elementos;
     }
 
     public void setTemporizado(boolean temporizado) {
