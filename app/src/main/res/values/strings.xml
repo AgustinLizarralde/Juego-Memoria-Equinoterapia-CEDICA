@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MEMORIALizarraldeLacunza</string>
+    <string name="caballo">caballo</string>
+    <string name="matra">matra</string>
+    <string name="montura">montura</string>
+    <string name="monturin">monturin</string>
+    <string name="cinchon_de_volteo">cinchon de volteo</string>
+    <string name="cabezada">cabezada</string>
+</resources>
