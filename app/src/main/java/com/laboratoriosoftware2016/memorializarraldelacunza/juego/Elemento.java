@@ -3,7 +3,8 @@ package com.laboratoriosoftware2016.memorializarraldelacunza.juego;
 import com.laboratoriosoftware2016.memorializarraldelacunza.R;
 
 /**
- * Created by Agustin on 05/12/2016.
+ * Representa a los elementos del juego de memoria.
+ * De estos elementos se puede extraer sus propiedades asociadas como nombre, imagen y sonido.
  */
 
 public enum Elemento {

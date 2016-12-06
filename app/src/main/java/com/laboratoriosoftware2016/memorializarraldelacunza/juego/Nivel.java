@@ -1,25 +1,27 @@
 package com.laboratoriosoftware2016.memorializarraldelacunza.juego;
 
+import com.laboratoriosoftware2016.memorializarraldelacunza.R;
+
 /**
- * Created by Agustin on 04/12/2016.
+ * Informacion sobre el nivel de dificultad del juego
  */
 
 public enum Nivel {
-    INICIAL("Inicial", 1),
-    MEDIO("Medio", 2),
-    AVANZADO("Avanzado", 3),
-    EXPERTO("Experto", 4);
+    INICIAL(R.string.dificultad_inicial, 1),
+    MEDIO(R.string.dificultad_media, 2),
+    AVANZADO(R.string.dificultad_avanzada, 3),
+    EXPERTO(R.string.dificultad_experto, 4);
 
-    private String nombre;
+    private Integer idNombre;
     private Integer maxImagenes;
 
-    Nivel(String nombre, Integer maxImagenes){
-        this.nombre=nombre;
+    Nivel(int idNombre, Integer maxImagenes){
+        this.idNombre = idNombre;
         this.maxImagenes=maxImagenes;
     }
 
-    public String getNombre(){
-        return this.nombre;
+    public Integer getIdNombre(){
+        return this.idNombre;
     }
 
     public Integer getMaxImagenes(){

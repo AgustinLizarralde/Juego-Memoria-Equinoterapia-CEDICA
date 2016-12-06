@@ -1,7 +1,6 @@
 package com.laboratoriosoftware2016.memorializarraldelacunza.activities;
 
 import android.media.MediaPlayer;
-import android.os.CountDownTimer;
 import android.support.annotation.Dimension;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.laboratoriosoftware2016.memorializarraldelacunza.R;
@@ -19,11 +17,13 @@ import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Nivel;
 import com.lb.auto_fit_textview.AutoResizeTextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 
+/**
+ * esta es la clase principal de la al¿plicacion
+ */
 public class JuegoPrincipal extends AppCompatActivity {
 
     private Elemento correcto = Elemento.MONTURA;
@@ -47,35 +47,11 @@ public class JuegoPrincipal extends AppCompatActivity {
 
         inicializarTitulo();
 
-        final ProgressBar mProgressBar;
-        CountDownTimer mCountDownTimer;
-        final int[] i = {0};
-
-        mProgressBar=(ProgressBar)findViewById(R.id.progressBar);
-        mProgressBar.setProgress(3);
-        /*
-        mCountDownTimer=new CountDownTimer(5000,1000) {
-
-            @Override
-            public void onTick(long millisUntilFinished) {
-                Log.v("Log_tag", "Tick of Progress"+ i[0] + millisUntilFinished);
-                i[0]++;
-                mProgressBar.setProgress(i[0]);
-
-            }
-
-            @Override
-            public void onFinish() {
-                //Do what you want
-                i[0]++;
-                mProgressBar.setProgress(i[0]);
-            }
-        };
-        mCountDownTimer.start();
-        */
     }
 
-
+    /**
+     * este metodo inicializa el titulo en base al Elemento correcto
+     */
     private void inicializarTitulo() {
         LinearLayout tituloContainer = (LinearLayout) findViewById(R.id.tituloContainer);
 
@@ -122,9 +98,14 @@ public class JuegoPrincipal extends AppCompatActivity {
         tituloContainer.addView(ic_sound);
     }
 
+    /**
+     * Devuelve un conjunto de imagenes a mostrar como opciones.
+     * Esto es el elemento correcto mas una cantidad de opciones extras random para llenar el espacio hasta alcanzar el maximo de opciones del nivel seleccionado en la configuracion
+     * @return lista de ImageView
+     */
     private List<ImageView> conjuntoImagenes(){
 
-        //click listener correcto
+        //click listener sonido correcto
         View.OnClickListener clickListenerCorrecto = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,7 +115,7 @@ public class JuegoPrincipal extends AppCompatActivity {
             }
         };
 
-        //click listener incorrecto
+        //click listener sonido incorrecto
         View.OnClickListener clickListenerIncorrecto = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,18 +123,6 @@ public class JuegoPrincipal extends AppCompatActivity {
                 mp.start();
             }
         };
-
-/*
-List<ImageView> aux = new ArrayList<ImageView>();
-        Elemento[] var = Elemento.values();
-        List<Elemento> falsos = new ArrayList<Elemento>();
-        for (Elemento e : var) {
-            if( !e.equals(this.correcto)) {
-                falsos.add(e);
-            }
-        }
-        Collections.shuffle(falsos);
- */
 
         List<ImageView> lista = new ArrayList<ImageView>();
         List<Elemento> falsos = new ArrayList<Elemento>(EnumSet.allOf(Elemento.class));
@@ -174,6 +143,11 @@ List<ImageView> aux = new ArrayList<ImageView>();
         return lista;
     }
 
+    /**
+     * Crea un ImageView a mostrar a partir de los datos de un Elemento
+     * @param e elemento a crear en la imagen
+     * @return ImageView
+     */
     private ImageView crearOpcion( Elemento e ){
         ImageView img = new ImageView(this);
         img.setImageResource(e.getIdImagen());

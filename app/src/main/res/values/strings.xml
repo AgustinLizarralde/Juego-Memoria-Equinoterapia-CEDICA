@@ -6,4 +6,8 @@
     <string name="monturin">monturin</string>
     <string name="cinchon_de_volteo">cinchon de volteo</string>
     <string name="cabezada">cabezada</string>
+    <string name="dificultad_inicial">inicial</string>
+    <string name="dificultad_media">medio</string>
+    <string name="dificultad_avanzada">avanzado</string>
+    <string name="dificultad_experto">experto</string>
 </resources>

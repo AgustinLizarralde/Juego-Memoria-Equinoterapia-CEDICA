@@ -7,7 +7,7 @@ import android.util.Log;
 import static android.content.Context.MODE_PRIVATE;
 
 /**
- * Created by Agustin on 05/12/2016.
+ * Configuracion de la aplicacion extraida de las SharedPreferences (tambien las guarda)
  */
 
 public class Configuracion {
@@ -21,6 +21,10 @@ public class Configuracion {
     //private Set<Object> memoria
 
 
+    /**
+     * Al crearse la configuracion extrae las preferencias almacenadas
+     * @param context contexto del cual obtener las preferencias
+     */
     public Configuracion(Context context) {
         this.preferencias = context.getSharedPreferences(perfil, MODE_PRIVATE);
         this.editorPreferencias = this.preferencias.edit();
