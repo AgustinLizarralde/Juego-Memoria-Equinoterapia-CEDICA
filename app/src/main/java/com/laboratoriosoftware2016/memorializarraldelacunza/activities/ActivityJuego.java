@@ -19,14 +19,14 @@ import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Elemento;
 import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Nivel;
 
 /**
- * esta es la clase principal de la aplicacion
+ * esta es la acivity donde se jugara
  */
 public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
 
     private Elemento correcto = Elemento.MONTURA;
     private Configuracion configuracion;
     //TODO esto es de prueba
-    private Integer i=0;
+    private Integer turno=0;
     private FragmentManager fragmentManager;
 
     @Override
@@ -34,18 +34,25 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         this.configuracion = new Configuracion(this);
-        configuracion.setNivel(Nivel.MEDIO);
 
         setContentView(R.layout.activity_juego_principal);
 
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        MenuBuilder menuBuilder = new MenuBuilder(this);
 
         fragmentManager = getSupportFragmentManager();
+        FragmentTransaction FT = fragmentManager.beginTransaction();
+        if( turno == 0 ) {
+            FT.add(R.id.activity_juego_principal, new Fragment());
+        }
+        FT.commit();
+    }
 
-        iniciarTurno(configuracion.getElementos().get(i));
+    @Override
+    protected void onResume() {
+        super.onResume();
+        iniciarTurno(configuracion.getElementos().get(turno));
     }
 
     @Override
@@ -60,8 +67,7 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_settings:
                 // User chose the "Settings" item, show the app settings UI...
-                // TODO startActivity(new Intent(this,ActivityConfigurar.class));
-                Toast.makeText(this, "HOLA PAU", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(this,ActivityConfigurar.class));
                 return true;
 
             default:
@@ -73,10 +79,9 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
     }
 
     public void proximaEleccion(){
-        i++;
-        Log.e("indice",i.toString());
-        if(i<configuracion.getElementos().size()){
-            iniciarTurno(configuracion.getElementos().get(i));
+        turno++;
+        if(turno<configuracion.getElementos().size()){
+            iniciarTurno(configuracion.getElementos().get(turno));
         }
         else {
             Toast.makeText(this, "juego terminado", Toast.LENGTH_LONG).show();
@@ -84,15 +89,9 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
     }
 
     private void iniciarTurno(Elemento e){
-        Log.e("turno",e.toString());
         FragmentTransaction FT = fragmentManager.beginTransaction();
         Fragment fragment = new FragmentoEleccion(e, this.configuracion);
-        if( i == 0 ) {
-            FT.add(R.id.activity_juego_principal, fragment);
-        }
-        else{
-            FT.replace(R.id.activity_juego_principal, fragment);
-        }
+        FT.replace(R.id.activity_juego_principal, fragment);
         FT.commit();
     }
 }

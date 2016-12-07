@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array
+        name="listArray">
+        <item>Inicial</item>
+        <item>Medio</item>
+        <item>Avanzado</item>
+        <item>Experto</item>
+    </string-array>
+    <string-array
+        name="listValues">
+        <item>INICIAL</item>
+        <item>MEDIO</item>
+        <item>AVANZADO</item>
+        <item>EXPERTO</item>
+    </string-array>
+</resources>

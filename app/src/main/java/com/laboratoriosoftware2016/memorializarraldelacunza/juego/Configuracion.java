@@ -2,6 +2,7 @@ package com.laboratoriosoftware2016.memorializarraldelacunza.juego;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.laboratoriosoftware2016.memorializarraldelacunza.R;
@@ -16,8 +17,6 @@ import static android.content.Context.MODE_PRIVATE;
  */
 
 public class Configuracion {
-    private Nivel nivel;
-    private boolean temporizado;
     private SharedPreferences preferencias;
     private SharedPreferences.Editor editorPreferencias;
     List<Elemento> elementos = new ArrayList<>();
@@ -30,9 +29,8 @@ public class Configuracion {
      */
     public Configuracion(Context context) {
         this.context = context;
-        this.preferencias = context.getSharedPreferences(context.getString(R.string.key_perfil), MODE_PRIVATE);
+        this.preferencias = PreferenceManager.getDefaultSharedPreferences(context);
         this.editorPreferencias = this.preferencias.edit();
-        recargarPreferencias();
 
         //TODO sacar y usar una lista guardadoa
 
@@ -43,17 +41,16 @@ public class Configuracion {
     }
 
     public Nivel getNivel() {
-        return nivel;
+        return Nivel.valueOf(preferencias.getString(context.getString(R.string.key_nivel),Nivel.INICIAL.toString()));
     }
 
     public void setNivel(Nivel nivel) {
-        this.nivel = nivel;
-        this.editorPreferencias.putString(context.getString(R.string.key_nivel), this.nivel.toString());
+        this.editorPreferencias.putString(context.getString(R.string.key_nivel), nivel.toString());
         this.editorPreferencias.commit();
     }
 
     public boolean isTemporizado() {
-        return temporizado;
+        return preferencias.getBoolean(context.getString(R.string.key_temporizado),false);
     }
 
     public List<Elemento> getElementos() {
@@ -61,14 +58,8 @@ public class Configuracion {
     }
 
     public void setTemporizado(boolean temporizado) {
-        this.temporizado = temporizado;
-        this.editorPreferencias.putBoolean(context.getString(R.string.key_temporizado), this.temporizado);
+        this.editorPreferencias.putBoolean(context.getString(R.string.key_temporizado), temporizado);
         this.editorPreferencias.commit();
     }
 
-    public void recargarPreferencias(){
-        this.nivel = Nivel.valueOf(preferencias.getString(context.getString(R.string.key_nivel),Nivel.INICIAL.toString()));
-        Log.e("nivel", nivel.toString());
-        this.temporizado = preferencias.getBoolean(context.getString(R.string.key_temporizado),false);
-    }
 }

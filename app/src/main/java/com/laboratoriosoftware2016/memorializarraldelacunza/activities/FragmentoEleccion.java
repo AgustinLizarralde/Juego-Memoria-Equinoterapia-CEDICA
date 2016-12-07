@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Dimension;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 /**
- * Created by Agustin on 05/12/2016.
+ * 
  */
 
 public class FragmentoEleccion extends Fragment {
@@ -38,10 +39,6 @@ public class FragmentoEleccion extends Fragment {
         this.configuracion = configuracion;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Nullable
     @Override
@@ -159,7 +156,7 @@ public class FragmentoEleccion extends Fragment {
         List<Elemento> falsos = new ArrayList<Elemento>(EnumSet.allOf(Elemento.class));
         falsos.remove(correcto);
         Collections.shuffle(falsos);
-
+        Log.e("pref_nivel_seleccionado",configuracion.getNivel().toString());
         for (Elemento e : falsos.subList(0,configuracion.getNivel().getMaxImagenes()-1)) {
             ImageView img = crearOpcion(e);
             img.setOnClickListener(clickListenerIncorrecto);
