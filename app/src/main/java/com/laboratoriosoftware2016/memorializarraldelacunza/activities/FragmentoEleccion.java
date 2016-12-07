@@ -140,7 +140,7 @@ public class FragmentoEleccion extends Fragment {
                 mp.start();
 
                 //TODO accion click correcto (cambiar esto)
-                JuegoPrincipal jp = (JuegoPrincipal)getActivity();
+                ActivityJuego jp = (ActivityJuego)getActivity();
                 jp.proximaEleccion();
 
             }

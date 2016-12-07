@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="key_perfil" translatable="false">configuracion</string>
+    <string name="key_nivel" translatable="false">nivel</string>
+    <string name="titulo_temporizado">por tiempo</string>
+    <string name="key_temporizado" translatable="false">temporizado</string>
+    <string name="titulo_nivel">seleccionar nivel</string>
+</resources>
