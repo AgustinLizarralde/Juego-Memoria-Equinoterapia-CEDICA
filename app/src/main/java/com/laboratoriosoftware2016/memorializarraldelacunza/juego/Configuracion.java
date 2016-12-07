@@ -36,8 +36,8 @@ public class Configuracion {
 
         elementos.add(Elemento.CABALLO);
         elementos.add(Elemento.MATRA);
-        elementos.add(Elemento.MONTURA);
-        elementos.add(Elemento.MONTURIN);
+        elementos.add(Elemento.OJOS);
+        elementos.add(Elemento.BOZAL);
     }
 
     public Nivel getNivel() {
@@ -53,13 +53,33 @@ public class Configuracion {
         return preferencias.getBoolean(context.getString(R.string.key_temporizado),false);
     }
 
-    public List<Elemento> getElementos() {
-        return elementos;
-    }
-
     public void setTemporizado(boolean temporizado) {
         this.editorPreferencias.putBoolean(context.getString(R.string.key_temporizado), temporizado);
         this.editorPreferencias.commit();
+    }
+
+    public Integer getMaxSegundos(){
+        Integer num = Integer.valueOf(preferencias.getString(context.getString(R.string.key_tiempo_max),"30"));
+        return num;
+    }
+
+    public void setMaxSegundos(Integer integer) {
+        this.editorPreferencias.putString(context.getString(R.string.key_tiempo_max), integer.toString());
+        this.editorPreferencias.commit();
+    }
+
+    public Sexo getSexoVoz() {
+        Log.e("pref_sexo",Sexo.valueOf(preferencias.getString(context.getString(R.string.key_sexo_voz),Sexo.MASCULINO.toString())).toString());
+        return Sexo.valueOf(preferencias.getString(context.getString(R.string.key_sexo_voz),Sexo.MASCULINO.toString()));
+    }
+
+    public void setSexoVoz(Sexo sexo) {
+        this.editorPreferencias.putString(context.getString(R.string.key_sexo_voz), sexo.toString());
+        this.editorPreferencias.commit();
+    }
+
+    public List<Elemento> getElementos() {
+        return elementos;
     }
 
 }

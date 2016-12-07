@@ -34,7 +34,6 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         this.configuracion = new Configuracion(this);
-
         setContentView(R.layout.activity_juego_principal);
 
 
@@ -47,12 +46,13 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
             FT.add(R.id.activity_juego_principal, new Fragment());
         }
         FT.commit();
+
+        iniciarTurno(configuracion.getElementos().get(turno));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        iniciarTurno(configuracion.getElementos().get(turno));
     }
 
     @Override

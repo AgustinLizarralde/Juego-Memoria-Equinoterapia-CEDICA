@@ -4,16 +4,30 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
-    <CheckBoxPreference
+    <SwitchPreference
         android:key="@string/key_temporizado"
         android:title="@string/titulo_temporizado"
         android:defaultValue="false" />
+    <ListPreference
+        android:title="@string/titulo_tiempo_max"
+        android:key="@string/key_tiempo_max"
+        android:defaultValue="30"
+        android:dependency="@string/key_temporizado"
+        android:entries="@array/listSegundosTitulo"
+        android:entryValues="@array/listSegundosValues" />
 
     <ListPreference
         android:title="@string/titulo_nivel"
         android:key="@string/key_nivel"
         android:defaultValue="INICIAL"
-        android:entries="@array/listArray"
-        android:entryValues="@array/listValues" />
+        android:entries="@array/listNivelTitulo"
+        android:entryValues="@array/listNivelValues" />
+
+    <ListPreference
+        android:title="@string/titulo_sexo_voz"
+        android:key="@string/key_sexo_voz"
+        android:defaultValue="MASCULINO"
+        android:entries="@array/listVozTitulo"
+        android:entryValues="@array/listVozValues" />
 
 </PreferenceScreen>

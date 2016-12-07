@@ -2,7 +2,11 @@
 <resources>
     <string name="key_perfil" translatable="false">configuracion</string>
     <string name="key_nivel" translatable="false">nivel</string>
-    <string name="titulo_temporizado">por tiempo</string>
-    <string name="key_temporizado" translatable="false">temporizado</string>
     <string name="titulo_nivel">seleccionar nivel</string>
+    <string name="key_temporizado" translatable="false">temporizado</string>
+    <string name="titulo_temporizado">por tiempo</string>
+    <string name="key_tiempo_max" translatable="false">tiempoMax</string>
+    <string name="titulo_tiempo_max">maximo tiempo de respuesa</string>
+    <string name="key_sexo_voz" translatable="false">voz</string>
+    <string name="titulo_sexo_voz">seleccionar voz</string>
 </resources>

@@ -1,17 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array
-        name="listArray">
+        name="listNivelTitulo">
         <item>Inicial</item>
         <item>Medio</item>
         <item>Avanzado</item>
         <item>Experto</item>
     </string-array>
     <string-array
-        name="listValues">
+        name="listNivelValues">
         <item>INICIAL</item>
         <item>MEDIO</item>
         <item>AVANZADO</item>
         <item>EXPERTO</item>
     </string-array>
+
+    <string-array
+        name="listSegundosTitulo">
+        <item>15</item>
+        <item>30</item>
+        <item>45</item>
+        <item>60</item>
+        <item>75</item>
+        <item>90</item>
+    </string-array>
+    <string-array
+        name="listSegundosValues">
+        <item>15</item>
+        <item>30</item>
+        <item>45</item>
+        <item>60</item>
+        <item>75</item>
+        <item>90</item>
+    </string-array>
+
+    <string-array
+        name="listVozTitulo">
+        <item>Femenino</item>
+        <item>Masculino</item>
+    </string-array>
+    <string-array
+        name="listVozValues">
+        <item>FEMENINO</item>
+        <item>MASCULINO</item>
+    </string-array>
+
 </resources>

@@ -10,4 +10,23 @@
     <string name="dificultad_media">medio</string>
     <string name="dificultad_avanzada">avanzado</string>
     <string name="dificultad_experto">experto</string>
+    <string name="bozal">bozal</string>
+    <string name="riendas">riendas</string>
+    <string name="cascos">cascos</string>
+    <string name="casco">casco</string>
+    <string name="arriador">arriador</string>
+    <string name="fusta">fusta</string>
+    <string name="cuerda">cuerda</string>
+    <string name="cepillo">cepillo</string>
+    <string name="rasqueta">rasqueta</string>
+    <string name="escarba_vasos">escarba vasos</string>
+    <string name="palos">palos</string>
+    <string name="pasto">pasto</string>
+    <string name="zanahoria">zanahoria</string>
+    <string name="pelota">pelota</string>
+    <string name="aros">aros</string>
+    <string name="orejas">orejas</string>
+    <string name="crines">crines</string>
+    <string name="cola">cola</string>
+    <string name="ojos">ojos</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.laboratoriosoftware2016.memorializarraldelacunza.activities;
 
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.laboratoriosoftware2016.memorializarraldelacunza.R;
@@ -25,7 +27,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 /**
- * 
+ *
  */
 
 public class FragmentoEleccion extends Fragment {
@@ -84,7 +86,7 @@ public class FragmentoEleccion extends Fragment {
         View.OnClickListener clickListener= new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MediaPlayer mp = MediaPlayer.create(getActivity().getApplicationContext(), correcto.getIdSondioMasculino());
+                MediaPlayer mp = MediaPlayer.create(getActivity().getApplicationContext(), correcto.getIdSonido(configuracion.getSexoVoz()));
                 mp.start();
             }
         };
@@ -120,6 +122,33 @@ public class FragmentoEleccion extends Fragment {
         soundLP.gravity=Gravity.CENTER;
         ic_sound.setLayoutParams(soundLP);
         tituloContainer.addView(ic_sound);
+
+        if( configuracion.isTemporizado() ) {
+            setearTimmer();
+        }
+        else{
+            getActivity().findViewById(R.id.progressBar).setVisibility(View.GONE);
+        }
+
+    }
+
+    private void setearTimmer() {
+        final ProgressBar bar = (ProgressBar) getActivity().findViewById(R.id.progressBar);
+        Integer maxSec = configuracion.getMaxSegundos()*1000;
+        bar.setMax(maxSec);
+        bar.setVisibility(View.VISIBLE);
+        new CountDownTimer(maxSec, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                Integer progreso = (int)millisUntilFinished;
+                bar.setProgress(progreso);
+            }
+
+            public void onFinish() {
+                bar.setProgress(0);
+                //TODO que pasa cuando pierde?
+            }
+        }.start();
     }
 
     /**
@@ -147,7 +176,7 @@ public class FragmentoEleccion extends Fragment {
         View.OnClickListener clickListenerIncorrecto = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.incorrecto);
+                MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.resoplido);
                 mp.start();
             }
         };
