@@ -5,9 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,7 +14,6 @@ import android.widget.Toast;
 import com.laboratoriosoftware2016.memorializarraldelacunza.R;
 import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Configuracion;
 import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Elemento;
-import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Nivel;
 
 /**
  * esta es la acivity donde se jugara
@@ -84,7 +81,8 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
             iniciarTurno(configuracion.getElementos().get(turno));
         }
         else {
-            Toast.makeText(this, "juego terminado", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Has ganado!", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this,ActivityInicio.class));
         }
     }
 

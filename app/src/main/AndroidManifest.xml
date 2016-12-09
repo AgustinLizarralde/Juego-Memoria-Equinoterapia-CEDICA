@@ -7,16 +7,20 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-        >
-        <activity android:name=".activities.ActivityJuego" android:configChanges="screenSize|orientation">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity
+            android:name=".activities.ActivityJuego"
+            android:configChanges="screenSize|orientation">
+        </activity>
+        <activity
+            android:name=".activities.ActivityConfigurar"
+            android:configChanges="screenSize|orientation"></activity>
+        <activity android:name=".activities.ActivityInicio">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".activities.ActivityConfigurar" android:configChanges="screenSize|orientation" >
         </activity>
     </application>
 
