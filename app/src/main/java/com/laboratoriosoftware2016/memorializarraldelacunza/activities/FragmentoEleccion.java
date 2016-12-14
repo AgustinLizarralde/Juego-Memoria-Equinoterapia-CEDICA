@@ -146,12 +146,14 @@ public class FragmentoEleccion extends Fragment {
         new CountDownTimer(maxSec, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                Integer progreso = (int)millisUntilFinished;
-                bar.setProgress(progreso);
+                if(configuracion.isJugando()) {
+                    Integer progreso = (int) millisUntilFinished;
+                    bar.setProgress(progreso);
+                }
             }
 
             public void onFinish() {
-                if(getActivity() != null){
+                if(getActivity() != null && configuracion.isJugando()){
                     bar.setProgress(0);
                     configuracion.notJugando();
                     LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);

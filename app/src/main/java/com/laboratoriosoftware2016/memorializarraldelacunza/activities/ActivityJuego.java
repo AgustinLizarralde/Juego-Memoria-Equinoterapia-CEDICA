@@ -1,19 +1,29 @@
 package com.laboratoriosoftware2016.memorializarraldelacunza.activities;
 
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.PopupWindow;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.laboratoriosoftware2016.memorializarraldelacunza.R;
 import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Configuracion;
 import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Elemento;
+
+import static java.security.AccessController.getContext;
 
 /**
  * esta es la acivity donde se jugara
@@ -34,6 +44,7 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction FT = fragmentManager.beginTransaction();
@@ -64,7 +75,9 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
                 // User chose the "Settings" item, show the app settings UI...
                 startActivity(new Intent(this,ActivityConfigurar.class));
                 return true;
-
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
@@ -79,8 +92,9 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
             iniciarTurno(configuracion.getElementos().get(configuracion.getTurno()));
         }
         else {
-            LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-            View popupView = layoutInflater.inflate(R.layout.popup, null);
+            configuracion.notJugando();
+            LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+            View popupView = layoutInflater.inflate(R.layout.popup_ganaste, null);
             final PopupWindow popupWindow = new PopupWindow(popupView, RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
 
             Button boton_volver_jugar = (Button)popupView.findViewById(R.id.boton_volver_jugar);
@@ -90,8 +104,9 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
                     startActivity(new Intent(v.getContext(),ActivityJuego.class));
                 }});
 
-            if (configuracion.getNivel() < configuacion.maximoNivelPosible() ) {
+            if ( !configuracion.isMaximoNivel() ) {
                 Button boton_subir_dificultad = (Button) popupView.findViewById(R.id.boton_subir_dificultad);
+                boton_subir_dificultad.setVisibility(View.VISIBLE);
                 boton_subir_dificultad.setOnClickListener(new Button.OnClickListener() {
 
                     @Override
@@ -111,7 +126,7 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
                 }});
 
 
-            popupWindow.showAtLocation(bar, Gravity.CENTER,0,0);
+            popupWindow.showAtLocation(findViewById(android.R.id.content), Gravity.CENTER,0,0);
         }
     }
 

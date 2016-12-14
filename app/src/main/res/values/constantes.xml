@@ -9,4 +9,6 @@
     <string name="titulo_tiempo_max">maximo tiempo de respuesa</string>
     <string name="key_sexo_voz" translatable="false">voz</string>
     <string name="titulo_sexo_voz">seleccionar voz</string>
+    <string name="key_elementos" translatable="false">elementos</string>
+    <string name="titulo_elementos">seleccionar elementos del juego</string>
 </resources>

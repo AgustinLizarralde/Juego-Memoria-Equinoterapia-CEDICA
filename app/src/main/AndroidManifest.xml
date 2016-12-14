@@ -10,11 +10,14 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
             android:name=".activities.ActivityJuego"
-            android:configChanges="screenSize|orientation">
+            android:configChanges="screenSize|orientation"
+            android:parentActivityName=".activities.ActivityInicio">
         </activity>
         <activity
             android:name=".activities.ActivityConfigurar"
-            android:configChanges="screenSize|orientation"></activity>
+            android:configChanges="screenSize|orientation"
+            android:parentActivityName=".activities.ActivityInicio">
+        </activity>
         <activity android:name=".activities.ActivityInicio">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -54,7 +54,13 @@ public class Configuracion {
     }
 
     public void aumentarNivel(){
+        Nivel[] niveles = Nivel.values();
+        int index = Math.min(getNivel().ordinal()+1,niveles.length-1);
+        this.setNivel(niveles[index]);
+    }
 
+    public boolean isMaximoNivel() {
+        return getNivel().ordinal() == Nivel.values().length-1;
     }
 
     public boolean isTemporizado() {
@@ -117,4 +123,5 @@ public class Configuracion {
     public void notJugando() {
         this.jugando = false;
     }
+
 }
