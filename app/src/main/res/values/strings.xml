@@ -31,4 +31,6 @@
     <string name="ojos">ojos</string>
     <string name="jugar">jugar</string>
     <string name="configuracion">configuracion</string>
+    <string name="seguir_jugando">seguir jugando</string>
+    <string name="volver_inicio">ir a inicio</string>
 </resources>

@@ -146,6 +146,34 @@ public class FragmentoEleccion extends Fragment {
 
             public void onFinish() {
                 bar.setProgress(0);
+
+
+                layoutInflater =(LayoutInflater)getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                popupView = layoutInflater.inflate(R.layout.popup, null);
+                popupWindow = new PopupWindow(popupView,RadioGroup.LayoutParams.WRAP_CONTENT,
+                        RadioGroup.LayoutParams.WRAP_CONTENT);
+
+                btn_Cerrar = (Button)popupView.findViewById(R.id.id_cerrar);
+                btn_Cerrar.setOnClickListener(new Button.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }});
+
+                btn_volver_inicio = (Button)popupView.findViewById(R.id.id_cerrar);
+                btn_volver_inicio.setOnClickListener(new Button.OnClickListener(){
+
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(v.getContext(),ActivityInicio.class));
+                    }});
+
+                popupWindow.showAsDropDown(btn_Abrir_Popup, 50, 0);
+
+            }});
+
+
+
                 //TODO que pasa cuando pierde?
             }
         }.start();
