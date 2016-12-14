@@ -174,7 +174,7 @@ public class FragmentoEleccion extends Fragment {
                             startActivity(new Intent(v.getContext(),ActivityInicio.class));
                         }});
 
-                    popupWindow.showAsDropDown(bar, 50, 0);
+                    popupWindow.showAtLocation(bar, Gravity.CENTER,0,0);
                 }
             }
         }.start();
