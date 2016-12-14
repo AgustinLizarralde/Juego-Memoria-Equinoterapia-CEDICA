@@ -53,6 +53,10 @@ public class Configuracion {
         this.editorPreferencias.commit();
     }
 
+    public void aumentarNivel(){
+
+    }
+
     public boolean isTemporizado() {
         return preferencias.getBoolean(context.getString(R.string.key_temporizado),false);
     }

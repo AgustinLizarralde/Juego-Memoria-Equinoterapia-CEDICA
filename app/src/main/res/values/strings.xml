@@ -33,4 +33,7 @@
     <string name="configuracion">configuracion</string>
     <string name="seguir_jugando">seguir jugando</string>
     <string name="volver_inicio">ir a inicio</string>
+    <string name="ganaste">felicidades ganaste</string>
+    <string name="subir_dificultad">aumentar la dificultad</string>
+    <string name="volver_jugar">volver a jugar</string>
 </resources>

@@ -79,8 +79,39 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
             iniciarTurno(configuracion.getElementos().get(configuracion.getTurno()));
         }
         else {
-            Toast.makeText(this, "Has ganado!", Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this,ActivityInicio.class));
+            LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+            View popupView = layoutInflater.inflate(R.layout.popup, null);
+            final PopupWindow popupWindow = new PopupWindow(popupView, RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
+
+            Button boton_volver_jugar = (Button)popupView.findViewById(R.id.boton_volver_jugar);
+            boton_volver_jugar.setOnClickListener(new Button.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(v.getContext(),ActivityJuego.class));
+                }});
+
+            if (configuracion.getNivel() < configuacion.maximoNivelPosible() ) {
+                Button boton_subir_dificultad = (Button) popupView.findViewById(R.id.boton_subir_dificultad);
+                boton_subir_dificultad.setOnClickListener(new Button.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        configuracion.aumentarNivel();
+                        startActivity(new Intent(v.getContext(), ActivityJuego.class));
+                    }
+                });
+            }
+
+            Button boton_menu = (Button)popupView.findViewById(R.id.boton_menu);
+            boton_menu.setOnClickListener(new Button.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(v.getContext(),ActivityInicio.class));
+                }});
+
+
+            popupWindow.showAtLocation(bar, Gravity.CENTER,0,0);
         }
     }
 
