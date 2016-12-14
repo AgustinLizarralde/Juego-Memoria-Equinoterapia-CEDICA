@@ -8,7 +8,9 @@ import android.util.Log;
 import com.laboratoriosoftware2016.memorializarraldelacunza.R;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -19,7 +21,6 @@ import static android.content.Context.MODE_PRIVATE;
 public class Configuracion {
     private SharedPreferences preferencias;
     private SharedPreferences.Editor editorPreferencias;
-    List<Elemento> elementos = new ArrayList<>();
     private Integer turno;
     private boolean jugando;
     private Context context;
@@ -35,13 +36,6 @@ public class Configuracion {
         this.editorPreferencias = this.preferencias.edit();
         this.turno = 0;
         this.jugando = false;
-
-        //TODO sacar y usar una lista guardadoa
-
-        elementos.add(Elemento.CABALLO);
-        elementos.add(Elemento.MATRA);
-        elementos.add(Elemento.OJOS);
-        elementos.add(Elemento.BOZAL);
     }
 
     public Nivel getNivel() {
@@ -83,7 +77,6 @@ public class Configuracion {
     }
 
     public Sexo getSexoVoz() {
-        Log.e("pref_sexo",Sexo.valueOf(preferencias.getString(context.getString(R.string.key_sexo_voz),Sexo.MASCULINO.toString())).toString());
         return Sexo.valueOf(preferencias.getString(context.getString(R.string.key_sexo_voz),Sexo.MASCULINO.toString()));
     }
 
@@ -93,6 +86,11 @@ public class Configuracion {
     }
 
     public List<Elemento> getElementos() {
+        Set<String> elementosString = preferencias.getStringSet(context.getString(R.string.key_elementos),new HashSet<String>());
+        List<Elemento> elementos= new ArrayList<>();
+        for (String str : elementosString) {
+            elementos.add(Elemento.valueOf(str));
+        }
         return elementos;
     }
 
