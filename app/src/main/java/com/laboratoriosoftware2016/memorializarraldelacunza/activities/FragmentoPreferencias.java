@@ -41,15 +41,7 @@ public class FragmentoPreferencias extends PreferenceFragment {
         Collections.sort(keys_elementos);
         Collections.sort(values_elementos);
 
-
-        /*
-        Elemento[] elems = Elemento.values();
-        int index = Math.max(Elemento.CABALLO.ordinal()+1,Elemento.values().length);
-
-        Elemento e = elems[index];
-        */
-
-        Set<String> selectionSet = new HashSet<String>(keys_elementos);
+        Set<String> selectionSet = new HashSet<String>(values_elementos);
 
         MultiSelectListPreference multiSelectPref = new MultiSelectListPreference(getActivity());
         multiSelectPref.setKey(getString(R.string.key_elementos));

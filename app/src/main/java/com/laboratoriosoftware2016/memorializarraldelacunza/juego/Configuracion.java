@@ -86,7 +86,11 @@ public class Configuracion {
     }
 
     public List<Elemento> getElementos() {
-        Set<String> elementosString = preferencias.getStringSet(context.getString(R.string.key_elementos),new HashSet<String>());
+        Set<String> def = new HashSet<>();
+        for (Elemento e : Elemento.values()) {
+            def.add(e.name());
+        }
+        Set<String> elementosString = preferencias.getStringSet(context.getString(R.string.key_elementos),def);
         List<Elemento> elementos= new ArrayList<>();
         for (String str : elementosString) {
             elementos.add(Elemento.valueOf(str));
