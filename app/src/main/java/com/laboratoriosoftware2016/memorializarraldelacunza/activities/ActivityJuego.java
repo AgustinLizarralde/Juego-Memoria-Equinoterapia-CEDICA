@@ -1,6 +1,7 @@
 package com.laboratoriosoftware2016.memorializarraldelacunza.activities;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.opengl.Visibility;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.laboratoriosoftware2016.memorializarraldelacunza.R;
 import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Configuracion;
 import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Elemento;
+import com.plattysoft.leonids.ParticleSystem;
 
 import static java.security.AccessController.getContext;
 
@@ -93,6 +95,9 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
         }
         else {
             configuracion.notJugando();
+
+
+
             LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
             View popupView = layoutInflater.inflate(R.layout.popup_ganaste, null);
             final PopupWindow popupWindow = new PopupWindow(popupView, RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
@@ -125,9 +130,16 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
                     startActivity(new Intent(v.getContext(),ActivityInicio.class));
                 }});
 
-
             popupWindow.showAtLocation(findViewById(android.R.id.content), Gravity.CENTER,0,0);
+            confeti(popupView);
         }
+    }
+
+    private void confeti(View v) {
+        Point size = new Point();
+        new ParticleSystem(this, 250, R.drawable.confeti2, 5000)
+                .setSpeedRange(0.4f, 0.7f)
+                .emit(v,250,5000);
     }
 
     private void iniciarTurno(Elemento e){

@@ -24,6 +24,7 @@ import com.laboratoriosoftware2016.memorializarraldelacunza.R;
 import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Configuracion;
 import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Elemento;
 import com.lb.auto_fit_textview.AutoResizeTextView;
+import com.plattysoft.leonids.ParticleSystem;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -197,6 +198,10 @@ public class FragmentoEleccion extends Fragment {
                     MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.correcto);
                     mp.start();
 
+                    new ParticleSystem(getActivity(),10, R.mipmap.ic_star,2000)
+                    .setRotationSpeed(144)
+                    .setSpeedRange(0.1f, 0.2f)
+                    .oneShot(v, 8);
                     ActivityJuego jp = (ActivityJuego) getActivity();
                     jp.proximaEleccion();
                 }
