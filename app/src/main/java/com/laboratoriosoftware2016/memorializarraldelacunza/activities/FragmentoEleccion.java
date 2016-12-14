@@ -1,5 +1,6 @@
 package com.laboratoriosoftware2016.memorializarraldelacunza.activities;
 
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.media.MediaPlayer;
@@ -11,9 +12,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.laboratoriosoftware2016.memorializarraldelacunza.R;
@@ -25,6 +29,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  *
@@ -145,36 +151,31 @@ public class FragmentoEleccion extends Fragment {
             }
 
             public void onFinish() {
-                bar.setProgress(0);
+                if(getActivity() != null){
+                    bar.setProgress(0);
+                    configuracion.notJugando();
+                    LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
+                    View popupView = layoutInflater.inflate(R.layout.popup, null);
+                    final PopupWindow popupWindow = new PopupWindow(popupView, RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
 
+                    Button btn_Cerrar = (Button)popupView.findViewById(R.id.boton_seguir);
+                    btn_Cerrar.setOnClickListener(new Button.OnClickListener(){
+                        @Override
+                        public void onClick(View v) {
+                            popupWindow.dismiss();
+                            configuracion.jugar();
+                        }});
 
-                layoutInflater =(LayoutInflater)getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-                popupView = layoutInflater.inflate(R.layout.popup, null);
-                popupWindow = new PopupWindow(popupView,RadioGroup.LayoutParams.WRAP_CONTENT,
-                        RadioGroup.LayoutParams.WRAP_CONTENT);
+                    Button btn_volver_inicio = (Button)popupView.findViewById(R.id.boton_inicio);
+                    btn_volver_inicio.setOnClickListener(new Button.OnClickListener(){
 
-                btn_Cerrar = (Button)popupView.findViewById(R.id.id_cerrar);
-                btn_Cerrar.setOnClickListener(new Button.OnClickListener(){
-                    @Override
-                    public void onClick(View v) {
-                        popupWindow.dismiss();
-                    }});
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(v.getContext(),ActivityInicio.class));
+                        }});
 
-                btn_volver_inicio = (Button)popupView.findViewById(R.id.id_cerrar);
-                btn_volver_inicio.setOnClickListener(new Button.OnClickListener(){
-
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(v.getContext(),ActivityInicio.class));
-                    }});
-
-                popupWindow.showAsDropDown(btn_Abrir_Popup, 50, 0);
-
-            }});
-
-
-
-                //TODO que pasa cuando pierde?
+                    popupWindow.showAsDropDown(bar, 50, 0);
+                }
             }
         }.start();
     }
@@ -190,13 +191,13 @@ public class FragmentoEleccion extends Fragment {
         View.OnClickListener clickListenerCorrecto = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.correcto);
-                mp.start();
+                if( configuracion.isJugando() ) {
+                    MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.correcto);
+                    mp.start();
 
-                //TODO accion click correcto (cambiar esto)
-                ActivityJuego jp = (ActivityJuego)getActivity();
-                jp.proximaEleccion();
-
+                    ActivityJuego jp = (ActivityJuego) getActivity();
+                    jp.proximaEleccion();
+                }
             }
         };
 
@@ -204,8 +205,10 @@ public class FragmentoEleccion extends Fragment {
         View.OnClickListener clickListenerIncorrecto = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.resoplido);
-                mp.start();
+                if( configuracion.isJugando() ) {
+                    MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.resoplido);
+                    mp.start();
+                }
             }
         };
 

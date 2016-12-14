@@ -20,6 +20,8 @@ public class Configuracion {
     private SharedPreferences preferencias;
     private SharedPreferences.Editor editorPreferencias;
     List<Elemento> elementos = new ArrayList<>();
+    private Integer turno;
+    private boolean jugando;
     private Context context;
 
 
@@ -31,6 +33,8 @@ public class Configuracion {
         this.context = context;
         this.preferencias = PreferenceManager.getDefaultSharedPreferences(context);
         this.editorPreferencias = this.preferencias.edit();
+        this.turno = 0;
+        this.jugando = false;
 
         //TODO sacar y usar una lista guardadoa
 
@@ -82,4 +86,31 @@ public class Configuracion {
         return elementos;
     }
 
+    public Integer getTurno() {
+        return turno;
+    }
+
+    public void setTurno(Integer turno) {
+        this.turno = turno;
+    }
+
+    public boolean isJugando() {
+        return jugando;
+    }
+
+    public void setJugando(boolean jugando) {
+        this.jugando = jugando;
+    }
+
+    public void jugar() {
+        this.jugando = true;
+    }
+
+    public void proximoTurno() {
+        this.turno++;
+    }
+
+    public void notJugando() {
+        this.jugando = false;
+    }
 }

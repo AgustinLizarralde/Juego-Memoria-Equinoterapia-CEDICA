@@ -22,8 +22,6 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
 
     private Elemento correcto = Elemento.MONTURA;
     private Configuracion configuracion;
-    //TODO esto es de prueba
-    private Integer turno=0;
     private FragmentManager fragmentManager;
 
     @Override
@@ -39,12 +37,12 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
 
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction FT = fragmentManager.beginTransaction();
-        if( turno == 0 ) {
+        if( configuracion.getTurno() == 0 ) {
             FT.add(R.id.activity_juego_principal, new Fragment());
         }
         FT.commit();
 
-        iniciarTurno(configuracion.getElementos().get(turno));
+        iniciarTurno(configuracion.getElementos().get(configuracion.getTurno()));
     }
 
     @Override
@@ -76,9 +74,9 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
     }
 
     public void proximaEleccion(){
-        turno++;
-        if(turno<configuracion.getElementos().size()){
-            iniciarTurno(configuracion.getElementos().get(turno));
+        configuracion.proximoTurno();
+        if(configuracion.getTurno()<configuracion.getElementos().size()){
+            iniciarTurno(configuracion.getElementos().get(configuracion.getTurno()));
         }
         else {
             Toast.makeText(this, "Has ganado!", Toast.LENGTH_LONG).show();
@@ -87,6 +85,7 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
     }
 
     private void iniciarTurno(Elemento e){
+        configuracion.jugar();
         FragmentTransaction FT = fragmentManager.beginTransaction();
         Fragment fragment = new FragmentoEleccion(e, this.configuracion);
         FT.replace(R.id.activity_juego_principal, fragment);
