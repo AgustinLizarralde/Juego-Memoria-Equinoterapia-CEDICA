@@ -36,4 +36,11 @@
     <string name="ganaste">felicidades ganaste</string>
     <string name="subir_dificultad">aumentar la dificultad</string>
     <string name="volver_jugar">volver a jugar</string>
+    <string name="grupo_tiempo">Tiempo</string>
+    <string name="grupo_nivel">Nivel</string>
+    <string name="grupo_voz">Voz</string>
+    <string name="grupo_seleccion_imagenes">Selección de imágenes</string>
+    <string name="boton_guardar">Guardar cambios</string>
+    <string name="title_activity_ads">ADSActivity</string>
+    <string name="title_activity_asdfg">ASDFGActivity</string>
 </resources>
