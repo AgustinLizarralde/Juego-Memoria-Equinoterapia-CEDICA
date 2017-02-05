@@ -6,17 +6,16 @@ import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 
 import com.laboratoriosoftware2016.memorializarraldelacunza.R;
 import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Elemento;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.StringTokenizer;
 
 /**
  * fragemento que carga las preferencias de un xml
@@ -72,6 +71,22 @@ public class FragmentoPreferencias extends PreferenceFragment {
 
         getPreferenceScreen().addPreference(category);
         getPreferenceScreen().addPreference(botonPlacebo);
+        Preference temporizado = getPreferenceScreen().findPreference(getString(R.string.key_temporizado));
+        boolean temporizado_bool = PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean(getString(R.string.key_temporizado),false);
+        Preference tiempo_max = getPreferenceScreen().findPreference(getString(R.string.key_tiempo_max));
+        tiempo_max.setEnabled(temporizado_bool);
+
+        temporizado.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if( newValue instanceof Boolean){
+                    Boolean bool = (Boolean) newValue;
+                        Preference tiempo_max = getPreferenceScreen().findPreference(getString(R.string.key_tiempo_max));
+                        tiempo_max.setEnabled(bool);
+                }
+                return true;
+            }
+        });
 
     }
 }

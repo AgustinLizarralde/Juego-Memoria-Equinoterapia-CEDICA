@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sample="http://schemas.android.com/apk/res-auto"
     android:key="@string/key_perfil"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
@@ -9,16 +10,20 @@
         android:key="pref_key_storage_settings">
 
         <SwitchPreference
+            android:id="@+id/is_on"
             android:key="@string/key_temporizado"
             android:title="@string/titulo_temporizado"
             android:defaultValue="false" />
-        <ListPreference
-            android:title="@string/titulo_tiempo_max"
+        <com.pavelsikun.seekbarpreference.SeekBarPreference
             android:key="@string/key_tiempo_max"
-            android:defaultValue="30"
+            android:title="@string/titulo_tiempo_max"
             android:dependency="@string/key_temporizado"
-            android:entries="@array/listSegundosTitulo"
-            android:entryValues="@array/listSegundosValues" />
+            android:enabled="true"
+            android:defaultValue="30"
+            sample:msbp_minValue="5"
+            sample:msbp_maxValue="120"
+            sample:msbp_interval="5"
+            sample:msbp_measurementUnit="s" />
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/grupo_nivel"

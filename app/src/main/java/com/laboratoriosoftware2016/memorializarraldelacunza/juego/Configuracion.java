@@ -67,12 +67,12 @@ public class Configuracion {
     }
 
     public Integer getMaxSegundos(){
-        Integer num = Integer.valueOf(preferencias.getString(context.getString(R.string.key_tiempo_max),"30"));
+        Integer num = new Integer(preferencias.getInt(context.getString(R.string.key_tiempo_max),30));
         return num;
     }
 
     public void setMaxSegundos(Integer integer) {
-        this.editorPreferencias.putString(context.getString(R.string.key_tiempo_max), integer.toString());
+        this.editorPreferencias.putInt(context.getString(R.string.key_tiempo_max), integer);
         this.editorPreferencias.commit();
     }
 
