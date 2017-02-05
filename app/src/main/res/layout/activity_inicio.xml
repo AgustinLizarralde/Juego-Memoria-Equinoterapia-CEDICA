@@ -12,7 +12,7 @@
     tools:context="com.laboratoriosoftware2016.memorializarraldelacunza.activities.ActivityInicio"
     android:orientation="vertical"
     android:weightSum="0"
-    android:background="@drawable/caballo">
+    android:background="@drawable/cedica_logo">
 
     <LinearLayout
         android:orientation="vertical"

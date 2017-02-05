@@ -43,4 +43,5 @@
     <string name="boton_guardar">Guardar cambios</string>
     <string name="title_activity_ads">ADSActivity</string>
     <string name="title_activity_asdfg">ASDFGActivity</string>
+    <string name="nivel">Nivel</string>
 </resources>

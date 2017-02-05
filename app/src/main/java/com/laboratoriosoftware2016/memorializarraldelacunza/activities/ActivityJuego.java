@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.laboratoriosoftware2016.memorializarraldelacunza.R;
@@ -35,6 +36,7 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
     private Elemento correcto = Elemento.MONTURA;
     private Configuracion configuracion;
     private FragmentManager fragmentManager;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +46,11 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
         setContentView(R.layout.activity_juego_principal);
 
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(myToolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        TextView txt = (TextView) findViewById(R.id.toolbar_text);
+        txt.setText(getString(R.string.nivel)+": " + configuracion.getNivel().toString().toLowerCase());
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         fragmentManager = getSupportFragmentManager();
