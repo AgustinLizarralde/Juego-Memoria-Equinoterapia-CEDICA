@@ -1,7 +1,10 @@
 package com.laboratoriosoftware2016.memorializarraldelacunza.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -13,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -23,6 +27,7 @@ import android.widget.TextView;
 import com.laboratoriosoftware2016.memorializarraldelacunza.R;
 import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Configuracion;
 import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Elemento;
+import com.laboratoriosoftware2016.memorializarraldelacunza.util.Colorear;
 import com.lb.auto_fit_textview.AutoResizeTextView;
 import com.plattysoft.leonids.ParticleSystem;
 
@@ -198,12 +203,24 @@ public class FragmentoEleccion extends Fragment {
                     MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.correcto);
                     mp.start();
 
+                    long milis = 3500;
+                    colorear(Color.GREEN, (ImageView) v, milis+500);
+
                     new ParticleSystem(getActivity(),10, R.mipmap.ic_star,2000)
                     .setRotationSpeed(144)
                     .setSpeedRange(0.1f, 0.2f)
                     .oneShot(v, 8);
-                    ActivityJuego jp = (ActivityJuego) getActivity();
-                    jp.proximaEleccion();
+
+                    final ActivityJuego jp = (ActivityJuego) getActivity();
+                    Runnable run = new Runnable() {
+                        @Override
+                        public void run() {
+                            jp.proximaEleccion();
+                        }
+                    };
+
+                    Handler h = new Handler();
+                    h.postDelayed(run,milis);
                 }
             }
         };
@@ -215,6 +232,8 @@ public class FragmentoEleccion extends Fragment {
                 if( configuracion.isJugando() ) {
                     MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.resoplido);
                     mp.start();
+
+                    colorear(Color.RED, (ImageView) v, 2000);
                 }
             }
         };
@@ -253,5 +272,10 @@ public class FragmentoEleccion extends Fragment {
         img.setLayoutParams(lp);
 
         return img;
+    }
+
+    private void colorear(int color, ImageView imagen, long milis){
+        Handler h = new Handler();
+        h.postDelayed(new Colorear(color, imagen),milis);
     }
 }

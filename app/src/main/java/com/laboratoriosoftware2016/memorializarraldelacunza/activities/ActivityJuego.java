@@ -149,6 +149,8 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
 
     private void iniciarTurno(Elemento e){
         configuracion.jugar();
+        TextView txt = (TextView) findViewById(R.id.toolbar_text);
+        txt.setText(getString(R.string.nivel)+": " + configuracion.getNivel().toString().toLowerCase());
         FragmentTransaction FT = fragmentManager.beginTransaction();
         Fragment fragment = new FragmentoEleccion(e, this.configuracion);
         FT.replace(R.id.activity_juego_principal, fragment);
