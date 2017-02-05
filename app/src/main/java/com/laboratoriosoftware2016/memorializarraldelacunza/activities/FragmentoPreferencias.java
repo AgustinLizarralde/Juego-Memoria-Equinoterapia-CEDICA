@@ -1,7 +1,10 @@
 package com.laboratoriosoftware2016.memorializarraldelacunza.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.MultiSelectListPreference;
+import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 
 import com.laboratoriosoftware2016.memorializarraldelacunza.R;
@@ -50,5 +53,25 @@ public class FragmentoPreferencias extends PreferenceFragment {
         multiSelectPref.setEntryValues(values_elementos.toArray(new String[0]));
         multiSelectPref.setDefaultValue(selectionSet);
         getPreferenceScreen().addPreference(multiSelectPref);
+
+        //simulacion de boton
+        PreferenceCategory category = new PreferenceCategory(getActivity());
+        category.setTitle("");
+
+        Preference botonPlacebo = new Preference(getActivity());
+        botonPlacebo.setKey("asdqweq");
+        botonPlacebo.setTitle(getString(R.string.boton_guardar));
+        botonPlacebo.setIcon(android.R.drawable.ic_menu_save);
+        botonPlacebo.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                startActivity(new Intent(preference.getContext(),ActivityInicio.class));
+                return true;
+            }
+        });
+
+        getPreferenceScreen().addPreference(category);
+        getPreferenceScreen().addPreference(botonPlacebo);
+
     }
 }
