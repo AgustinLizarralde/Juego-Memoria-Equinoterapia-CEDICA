@@ -38,6 +38,7 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
     private Configuracion configuracion;
     private FragmentManager fragmentManager;
     private Toolbar toolbar;
+    private Juego juego;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +61,8 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
             FT.add(R.id.activity_juego_principal, new Fragment());
         }
         FT.commit();
-        Juego j = new Juego(configuracion, this);
-        j.iniciarTurno();
+        this.juego= new Juego(configuracion, this);
+        juego.iniciarTurno();
         //iniciarTurno(configuracion.getElementos().get(configuracion.getTurno()));
     }
 
@@ -93,6 +94,10 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    public void proximaEleccion(){
+        this.juego.proximaEleccion();
     }
 
     public FragmentManager getFragmento(){
