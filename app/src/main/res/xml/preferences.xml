@@ -15,6 +15,7 @@
             android:title="@string/titulo_temporizado"
             android:defaultValue="false" />
         <com.pavelsikun.seekbarpreference.SeekBarPreference
+            android:id="@+id/seekbar"
             android:key="@string/key_tiempo_max"
             android:title="@string/titulo_tiempo_max"
             android:dependency="@string/key_temporizado"
@@ -48,5 +49,22 @@
             android:entryValues="@array/listVozValues" />
 
     </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/grupo_seleccion_imagenes"
+        android:key="pref_key_storage_settings">
 
+        <Preference
+            android:title="@string/titulo_elementos"
+            android:key="boton_seleccion"/>
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:title=""
+        android:key="pref_key_storage_settings">
+        <Preference
+            android:title="@string/boton_guardar"
+            android:key="boton_guardar"
+            sample:icon="@android:drawable/ic_menu_save" />
+    </PreferenceCategory>
 </PreferenceScreen>

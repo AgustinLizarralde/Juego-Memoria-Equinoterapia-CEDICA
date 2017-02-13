@@ -26,10 +26,7 @@ public class FragmentoPreferencias extends PreferenceFragment {
         PreferenceCategory categoryElementos = new PreferenceCategory(getActivity());
         categoryElementos.setTitle(getString(R.string.grupo_seleccion_imagenes));
 
-        Preference botonIntent = new Preference(getActivity());
-        botonIntent.setKey("asdqweq2");
-        botonIntent.setTitle(getString(R.string.titulo_elementos));
-        botonIntent.setIcon(android.R.drawable.ic_input_add);
+        Preference botonIntent = getPreferenceScreen().findPreference("boton_seleccion");
         botonIntent.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
@@ -37,28 +34,17 @@ public class FragmentoPreferencias extends PreferenceFragment {
                 return true;
             }
         });
-        categoryElementos.addPreference(botonIntent);
-        getPreferenceScreen().addPreference(categoryElementos);
-
 
         //simulacion de boton
-        PreferenceCategory categoryVacia = new PreferenceCategory(getActivity());
-        categoryVacia.setTitle("");
-
-
-        Preference botonPlacebo = new Preference(getActivity());
-        botonPlacebo.setKey("asdqweq");
-        botonPlacebo.setTitle(getString(R.string.boton_guardar));
+        Preference botonPlacebo = getPreferenceScreen().findPreference("boton_guardar");
         botonPlacebo.setIcon(android.R.drawable.ic_menu_save);
         botonPlacebo.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                startActivity(new Intent(preference.getContext(),ActivityInicio.class));
+                getActivity().finish();
                 return true;
             }
         });
-        categoryVacia.addPreference(botonPlacebo);
-        getPreferenceScreen().addPreference(categoryVacia);
 
         //dependency simulada
         Preference temporizado = getPreferenceScreen().findPreference(getString(R.string.key_temporizado));
