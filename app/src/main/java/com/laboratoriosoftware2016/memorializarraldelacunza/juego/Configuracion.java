@@ -32,7 +32,7 @@ public final class Configuracion {
      */
     public Configuracion(Context context) {
         this.context = context;
-        this.preferencias = PreferenceManager.getDefaultSharedPreferences(context);
+        this.preferencias = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         this.editorPreferencias = this.preferencias.edit();
         this.turno = 0;
         this.jugando = false;
