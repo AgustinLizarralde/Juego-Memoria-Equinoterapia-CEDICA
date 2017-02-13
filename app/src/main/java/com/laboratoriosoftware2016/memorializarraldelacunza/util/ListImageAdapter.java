@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import android.app.Activity;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,6 +86,10 @@ public class ListImageAdapter extends BaseAdapter{
         }
         else {
             holder.checkBox.setChecked(false);
+            ColorMatrix matrix = new ColorMatrix();
+            matrix.setSaturation(0);
+            ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+            holder.imageView.setColorFilter(filter);
         }
 
         holder.checkBox.setOnClickListener(new OnClickListener() {
@@ -94,9 +100,14 @@ public class ListImageAdapter extends BaseAdapter{
 
                 if (holder.checkBox.isChecked()) {
                     elementosSeleccionados.add(elemento.toString());
+                    holder.imageView.setColorFilter(null);
                 }
                 else {
                     elementosSeleccionados.remove(elemento.toString());
+                    ColorMatrix matrix = new ColorMatrix();
+                    matrix.setSaturation(0);
+                    ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+                    holder.imageView.setColorFilter(filter);
                 }
                 guardarCambios();
             }
@@ -110,7 +121,4 @@ public class ListImageAdapter extends BaseAdapter{
     private void guardarCambios(){
         PreferenceManager.getDefaultSharedPreferences(context).edit().putStringSet(context.getString(R.string.key_elementos),elementosSeleccionados);
     }
-
-
-
 }

@@ -5,11 +5,12 @@
     android:padding="5dp">
 
 
-    <ListView
+    <GridView
         android:id="@+id/listView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
+        android:numColumns="3"
         android:divider="#000"
         android:dividerHeight="0.8dp"/>
 

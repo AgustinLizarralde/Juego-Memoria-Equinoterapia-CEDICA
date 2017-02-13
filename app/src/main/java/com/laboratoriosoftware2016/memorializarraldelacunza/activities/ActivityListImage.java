@@ -6,7 +6,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
-import android.widget.ListView;
+import android.widget.GridView;
 
 import com.laboratoriosoftware2016.memorializarraldelacunza.R;
 import com.laboratoriosoftware2016.memorializarraldelacunza.util.ListImageAdapter;
@@ -15,19 +15,18 @@ import java.util.ArrayList;
 
 public class ActivityListImage extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    ListView listView;
-    ArrayList<String> checkedValue;
+    GridView itemsView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_images);
-        listView = (ListView) findViewById(R.id.listView1);
+        itemsView = (GridView) findViewById(R.id.listView1);
 
 
 
         ListImageAdapter Adapter = new ListImageAdapter(this);
-        listView.setAdapter(Adapter);
-        listView.setOnItemClickListener(this);
+        itemsView.setAdapter(Adapter);
+        itemsView.setOnItemClickListener(this);
     }
 
 
