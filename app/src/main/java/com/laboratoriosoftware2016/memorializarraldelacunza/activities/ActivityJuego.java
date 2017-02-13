@@ -61,9 +61,19 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
             FT.add(R.id.activity_juego_principal, new Fragment());
         }
         FT.commit();
-        this.juego= new Juego(configuracion, this);
-        juego.iniciarTurno();
-        //iniciarTurno(configuracion.getElementos().get(configuracion.getTurno()));
+
+        if( configuracion.getElementos().isEmpty()){
+            Toast.makeText(this,R.string.mensaje_sin_elementos_seleccionados,Toast.LENGTH_LONG).show();
+            Intent i = new Intent(this,ActivityInicio.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            this.finish();
+            this.startActivity(i);
+        }
+        else {
+            this.juego = new Juego(configuracion, this);
+            juego.iniciarTurno();
+            //iniciarTurno(configuracion.getElementos().get(configuracion.getTurno()));
+        }
     }
 
     @Override

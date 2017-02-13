@@ -18,7 +18,7 @@ import static android.content.Context.MODE_PRIVATE;
  * Configuracion de la aplicacion extraida de las SharedPreferences (tambien las guarda)
  */
 
-public class Configuracion {
+public final class Configuracion {
     private SharedPreferences preferencias;
     private SharedPreferences.Editor editorPreferencias;
     private Integer turno;
@@ -36,6 +36,7 @@ public class Configuracion {
         this.editorPreferencias = this.preferencias.edit();
         this.turno = 0;
         this.jugando = false;
+        Configuracion.setInstancia(this);
     }
 
     public Nivel getNivel() {
@@ -125,5 +126,23 @@ public class Configuracion {
     public void notJugando() {
         this.jugando = false;
     }
+
+
+    //omitir este pedazo de codigo
+    private static Configuracion instancia;
+
+    public static Configuracion getInstancia(){
+        if( instancia != null){
+            return instancia;
+        }
+        else {
+            throw new NullPointerException();
+        }
+    }
+
+    public static void setInstancia(Configuracion config){
+        instancia = config;
+    }
+
 
 }

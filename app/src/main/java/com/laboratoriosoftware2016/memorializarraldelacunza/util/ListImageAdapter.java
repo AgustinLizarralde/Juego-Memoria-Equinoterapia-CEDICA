@@ -77,8 +77,9 @@ public class ListImageAdapter extends BaseAdapter{
 
         holder.textView.setText(getItem(position).getString(this.context));
         holder.imageView.setImageResource(getItem(position).getIdImagen());
+        holder.textValue.setText(getItem(position).toString());
 
-        if (elementosSeleccionados.contains(holder.textView.getText().toString())) {
+        if (elementosSeleccionados.contains(holder.textValue.getText().toString())) {
             holder.checkBox.setChecked(true);
         }
         else {

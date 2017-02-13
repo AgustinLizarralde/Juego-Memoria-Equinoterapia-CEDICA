@@ -48,7 +48,10 @@ public class Juego {
         boton_volver_jugar.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v) {
-                contexto.startActivity(new Intent(v.getContext(),ActivityJuego.class));
+                Intent i = new Intent(v.getContext(),ActivityJuego.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                contexto.finish();
+                contexto.startActivity(i);
             }});
 
         if ( !configuracion.isMaximoNivel() ) {

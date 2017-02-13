@@ -2,7 +2,6 @@ package com.laboratoriosoftware2016.memorializarraldelacunza.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -16,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -75,8 +73,7 @@ public class FragmentoEleccion extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         // nose puede usar getView antes de onCreateView()
         LinearLayout imageContainer = (LinearLayout) getView().findViewById(R.id.imagenesContainer);
-
-        for( ImageView img: conjuntoImagenes()){
+        for (ImageView img : conjuntoImagenes()) {
             imageContainer.addView(img);
         }
 
@@ -210,7 +207,6 @@ public class FragmentoEleccion extends Fragment {
                     .setRotationSpeed(144)
                     .setSpeedRange(0.1f, 0.2f)
                     .oneShot(v, 8);
-
                     final ActivityJuego jp = (ActivityJuego) getActivity();
                     Runnable run = new Runnable() {
                         @Override
@@ -232,7 +228,6 @@ public class FragmentoEleccion extends Fragment {
                 if( configuracion.isJugando() ) {
                     MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.resoplido);
                     mp.start();
-
                     colorear(Color.RED, (ImageView) v, 2000);
                 }
             }

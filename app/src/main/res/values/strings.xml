@@ -44,4 +44,5 @@
     <string name="title_activity_ads">ADSActivity</string>
     <string name="title_activity_asdfg">ASDFGActivity</string>
     <string name="nivel">Nivel</string>
+    <string name="mensaje_sin_elementos_seleccionados">No hay elementos seleccionados</string>
 </resources>

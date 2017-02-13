@@ -5,6 +5,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Configuracion;
+
 /**
  * Created by Agustin on 05/02/2017.
  */
@@ -24,7 +26,7 @@ public class Colorear implements Runnable {
         scaleTypeOriginal = imagen.getScaleType();
         backgroundOriginal = imagen.getBackground();
         layoutParamsOriginal = imagen.getLayoutParams();
-
+        Configuracion.getInstancia().notJugando();
 
         imagen.setScaleType(ImageView.ScaleType.CENTER_INSIDE); // Sets how the bitmap is scaled in it's container
         imagen.setBackgroundColor(color);       // Define the border color
@@ -37,11 +39,13 @@ public class Colorear implements Runnable {
     public void run() {
 
         //volver a lo original
-        imagen.setScaleType(scaleTypeOriginal);
-        imagen.setBackground(backgroundOriginal);
-        imagen.setPadding(0,0,0,0);
-        imagen.setLayoutParams(layoutParamsOriginal);
-        imagen.setClickable(true);
-
+        if( imagen != null) {
+            Configuracion.getInstancia().jugar();
+            imagen.setScaleType(scaleTypeOriginal);
+            imagen.setBackground(backgroundOriginal);
+            imagen.setPadding(0, 0, 0, 0);
+            imagen.setLayoutParams(layoutParamsOriginal);
+            imagen.setClickable(true);
+        }
     }
 }

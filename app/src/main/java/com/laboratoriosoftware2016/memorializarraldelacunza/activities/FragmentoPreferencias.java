@@ -6,15 +6,28 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 
 import com.laboratoriosoftware2016.memorializarraldelacunza.R;
+import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Elemento;
+
+import java.util.HashSet;
 
 /**
  * fragemento que carga las preferencias de un xml
  */
 
 public class FragmentoPreferencias extends PreferenceFragment {
+
+    @Override
+    public void onResume() {
+        Preference botonIntent = getPreferenceScreen().findPreference("boton_seleccion");
+        botonIntent.setSummary(PreferenceManager.getDefaultSharedPreferences(getActivity()).getStringSet(getString(R.string.key_elementos),new HashSet<String>()).size()+"/"+ Elemento.values().length);
+        super.onResume();
+    }
 
     @Override
     public void onCreate(final Bundle savedInstanceState)
