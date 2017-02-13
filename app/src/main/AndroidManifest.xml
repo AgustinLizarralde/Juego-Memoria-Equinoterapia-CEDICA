@@ -11,13 +11,11 @@
         <activity
             android:name=".activities.ActivityJuego"
             android:configChanges="screenSize|orientation"
-            android:parentActivityName=".activities.ActivityInicio">
-        </activity>
+            android:parentActivityName=".activities.ActivityInicio" />
         <activity
             android:name=".activities.ActivityConfigurar"
             android:configChanges="screenSize|orientation"
-            android:parentActivityName=".activities.ActivityInicio">
-        </activity>
+            android:parentActivityName=".activities.ActivityInicio" />
         <activity android:name=".activities.ActivityInicio">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.ActivityListImage"></activity>
     </application>
 
 </manifest>

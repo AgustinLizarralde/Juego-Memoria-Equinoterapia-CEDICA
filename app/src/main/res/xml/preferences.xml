@@ -46,6 +46,7 @@
             android:defaultValue="MASCULINO"
             android:entries="@array/listVozTitulo"
             android:entryValues="@array/listVozValues" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

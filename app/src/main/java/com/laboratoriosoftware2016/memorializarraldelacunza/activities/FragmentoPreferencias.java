@@ -2,20 +2,13 @@ package com.laboratoriosoftware2016.memorializarraldelacunza.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
-import com.laboratoriosoftware2016.memorializarraldelacunza.R;
-import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Elemento;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import com.laboratoriosoftware2016.memorializarraldelacunza.R;
 
 /**
  * fragemento que carga las preferencias de un xml
@@ -29,33 +22,29 @@ public class FragmentoPreferencias extends PreferenceFragment {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
+        //boton seleccionar elementos
+        PreferenceCategory categoryElementos = new PreferenceCategory(getActivity());
+        categoryElementos.setTitle(getString(R.string.grupo_seleccion_imagenes));
 
-        List<String> keys_elementos = new ArrayList<>();
-        List<String> values_elementos = new ArrayList<>();
+        Preference botonIntent = new Preference(getActivity());
+        botonIntent.setKey("asdqweq2");
+        botonIntent.setTitle(getString(R.string.titulo_elementos));
+        botonIntent.setIcon(android.R.drawable.ic_input_add);
+        botonIntent.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                startActivity(new Intent(preference.getContext(),ActivityListImage.class));
+                return true;
+            }
+        });
+        categoryElementos.addPreference(botonIntent);
+        getPreferenceScreen().addPreference(categoryElementos);
 
-        int i=0;
-        for (Elemento e : Elemento.values()) {
-            keys_elementos.add(getString(e.getIdString()));
-            values_elementos.add(e.name());
-            i++;
-        }
-
-        Collections.sort(keys_elementos);
-        Collections.sort(values_elementos);
-
-        Set<String> selectionSet = new HashSet<String>(values_elementos);
-
-        MultiSelectListPreference multiSelectPref = new MultiSelectListPreference(getActivity());
-        multiSelectPref.setKey(getString(R.string.key_elementos));
-        multiSelectPref.setTitle(getString(R.string.titulo_elementos));
-        multiSelectPref.setEntries(keys_elementos.toArray(new String[0]));
-        multiSelectPref.setEntryValues(values_elementos.toArray(new String[0]));
-        multiSelectPref.setDefaultValue(selectionSet);
-        getPreferenceScreen().addPreference(multiSelectPref);
 
         //simulacion de boton
-        PreferenceCategory category = new PreferenceCategory(getActivity());
-        category.setTitle("");
+        PreferenceCategory categoryVacia = new PreferenceCategory(getActivity());
+        categoryVacia.setTitle("");
+
 
         Preference botonPlacebo = new Preference(getActivity());
         botonPlacebo.setKey("asdqweq");
@@ -68,9 +57,10 @@ public class FragmentoPreferencias extends PreferenceFragment {
                 return true;
             }
         });
+        categoryVacia.addPreference(botonPlacebo);
+        getPreferenceScreen().addPreference(categoryVacia);
 
-        getPreferenceScreen().addPreference(category);
-        getPreferenceScreen().addPreference(botonPlacebo);
+        //dependency simulada
         Preference temporizado = getPreferenceScreen().findPreference(getString(R.string.key_temporizado));
         boolean temporizado_bool = PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean(getString(R.string.key_temporizado),false);
         Preference tiempo_max = getPreferenceScreen().findPreference(getString(R.string.key_tiempo_max));
@@ -81,8 +71,8 @@ public class FragmentoPreferencias extends PreferenceFragment {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if( newValue instanceof Boolean){
                     Boolean bool = (Boolean) newValue;
-                        Preference tiempo_max = getPreferenceScreen().findPreference(getString(R.string.key_tiempo_max));
-                        tiempo_max.setEnabled(bool);
+                    Preference tiempo_max = getPreferenceScreen().findPreference(getString(R.string.key_tiempo_max));
+                    tiempo_max.setEnabled(bool);
                 }
                 return true;
             }
