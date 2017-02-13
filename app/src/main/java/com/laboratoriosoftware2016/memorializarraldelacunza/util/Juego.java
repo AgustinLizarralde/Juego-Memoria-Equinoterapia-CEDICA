@@ -33,6 +33,7 @@ public class Juego {
     private ActivityJuego contexto;
 
     public Juego(Configuracion config, ActivityJuego context ){
+        this.configuracion = config;
         this.contexto = context;
     }
 
