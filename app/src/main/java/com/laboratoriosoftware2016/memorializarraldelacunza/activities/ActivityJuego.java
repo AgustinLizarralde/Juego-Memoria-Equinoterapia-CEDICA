@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.laboratoriosoftware2016.memorializarraldelacunza.R;
 import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Configuracion;
 import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Elemento;
+import com.laboratoriosoftware2016.memorializarraldelacunza.util.Juego;
 import com.plattysoft.leonids.ParticleSystem;
 
 import static java.security.AccessController.getContext;
@@ -59,8 +60,9 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
             FT.add(R.id.activity_juego_principal, new Fragment());
         }
         FT.commit();
-
-        iniciarTurno(configuracion.getElementos().get(configuracion.getTurno()));
+        Juego j = new Juego(configuracion, this);
+        j.iniciarTurno();
+        //iniciarTurno(configuracion.getElementos().get(configuracion.getTurno()));
     }
 
     @Override
@@ -93,67 +95,8 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
         }
     }
 
-    public void proximaEleccion(){
-        configuracion.proximoTurno();
-        if(configuracion.getTurno()<configuracion.getElementos().size()){
-            iniciarTurno(configuracion.getElementos().get(configuracion.getTurno()));
-        }
-        else {
-            configuracion.notJugando();
-
-
-
-            LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
-            View popupView = layoutInflater.inflate(R.layout.popup_ganaste, null);
-            final PopupWindow popupWindow = new PopupWindow(popupView, RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
-
-            Button boton_volver_jugar = (Button)popupView.findViewById(R.id.boton_volver_jugar);
-            boton_volver_jugar.setOnClickListener(new Button.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(v.getContext(),ActivityJuego.class));
-                }});
-
-            if ( !configuracion.isMaximoNivel() ) {
-                Button boton_subir_dificultad = (Button) popupView.findViewById(R.id.boton_subir_dificultad);
-                boton_subir_dificultad.setVisibility(View.VISIBLE);
-                boton_subir_dificultad.setOnClickListener(new Button.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        configuracion.aumentarNivel();
-                        startActivity(new Intent(v.getContext(), ActivityJuego.class));
-                    }
-                });
-            }
-
-            Button boton_menu = (Button)popupView.findViewById(R.id.boton_menu);
-            boton_menu.setOnClickListener(new Button.OnClickListener(){
-
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(v.getContext(),ActivityInicio.class));
-                }});
-
-            popupWindow.showAtLocation(findViewById(android.R.id.content), Gravity.CENTER,0,0);
-            confeti(popupView);
-        }
+    public FragmentManager getFragmento(){
+        return this.fragmentManager;
     }
 
-    private void confeti(View v) {
-        Point size = new Point();
-        new ParticleSystem(this, 250, R.drawable.confeti2, 5000)
-                .setSpeedRange(0.4f, 0.7f)
-                .emit(v,250,5000);
-    }
-
-    private void iniciarTurno(Elemento e){
-        configuracion.jugar();
-        TextView txt = (TextView) findViewById(R.id.toolbar_text);
-        txt.setText(getString(R.string.nivel)+": " + configuracion.getNivel().toString().toLowerCase());
-        FragmentTransaction FT = fragmentManager.beginTransaction();
-        Fragment fragment = new FragmentoEleccion(e, this.configuracion);
-        FT.replace(R.id.activity_juego_principal, fragment);
-        FT.commit();
-    }
 }
