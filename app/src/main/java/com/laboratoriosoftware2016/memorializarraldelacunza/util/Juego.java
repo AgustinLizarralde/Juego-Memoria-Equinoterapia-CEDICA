@@ -59,7 +59,10 @@ public class Juego {
                 @Override
                 public void onClick(View v) {
                     configuracion.aumentarNivel();
-                    contexto.startActivity(new Intent(v.getContext(), ActivityJuego.class));
+                    Intent i = new Intent(v.getContext(),ActivityJuego.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    contexto.finish();
+                    contexto.startActivity(i);
                 }
             });
         }
@@ -69,7 +72,10 @@ public class Juego {
 
             @Override
             public void onClick(View v) {
-                contexto.startActivity(new Intent(v.getContext(),ActivityInicio.class));
+                Intent i = new Intent(v.getContext(),ActivityInicio.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                contexto.finish();
+                contexto.startActivity(i);
             }});
 
         popupWindow.showAtLocation(contexto.findViewById(android.R.id.content), Gravity.CENTER,0,0);
