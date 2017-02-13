@@ -28,12 +28,8 @@ public class ListImageAdapter extends BaseAdapter{
     public ListImageAdapter(Activity context) {
         super();
         this.context = context;
-
-        Set<String> def = new HashSet<>();
-        for (Elemento e : Elemento.values()) {
-            def.add(e.name());
-        }
-        elementosSeleccionados = PreferenceManager.getDefaultSharedPreferences(context).getStringSet(context.getString(R.string.key_elementos),def);
+        
+        elementosSeleccionados = PreferenceManager.getDefaultSharedPreferences(context).getStringSet(context.getString(R.string.key_elementos),new HashSet<String>());
     }
 
     private class ViewHolder {
@@ -119,6 +115,6 @@ public class ListImageAdapter extends BaseAdapter{
 
 
     private void guardarCambios(){
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putStringSet(context.getString(R.string.key_elementos),elementosSeleccionados);
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putStringSet(context.getString(R.string.key_elementos),elementosSeleccionados).commit();
     }
 }

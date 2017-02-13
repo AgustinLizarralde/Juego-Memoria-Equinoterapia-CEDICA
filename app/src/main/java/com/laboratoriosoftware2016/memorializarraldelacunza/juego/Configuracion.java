@@ -99,6 +99,11 @@ public final class Configuracion {
         return elementos;
     }
 
+    public void setElementos(Set<String> elementos){
+        editorPreferencias.putStringSet(context.getString(R.string.key_elementos),elementos);
+        this.editorPreferencias.commit();
+    }
+
     public Integer getTurno() {
         return turno;
     }
