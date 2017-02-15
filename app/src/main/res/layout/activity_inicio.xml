@@ -10,15 +10,13 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.laboratoriosoftware2016.memorializarraldelacunza.activities.ActivityInicio"
-    android:orientation="vertical"
-    android:weightSum="0"
-    android:background="@drawable/cedica_logo">
+    android:orientation="vertical">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="5"
+        android:layout_weight="50"
         android:id="@+id/titulo_container">
 
         <com.lb.auto_fit_textview.AutoResizeTextView
@@ -29,27 +27,39 @@
             android:layout_weight="0.21"
             android:gravity="center_vertical|center_horizontal"
             android:textSize="200sp" />
+
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/cedica_logo"
+        android:id="@+id/imageView"
+        android:layout_weight="25"
+        android:layout_gravity="center_horizontal" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="5"
+        android:layout_weight="35"
         android:id="@+id/opciones_container"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:weightSum="10">
 
         <Button
             android:text="@string/jugar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button_jugar" />
+            android:id="@+id/button_jugar"
+            android:layout_weight="5" />
 
         <Button
             android:text="@string/configuracion"
             android:id="@+id/button_configurar"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent" />
+            android:layout_width="match_parent"
+            android:layout_weight="5" />
 
     </LinearLayout>
 
