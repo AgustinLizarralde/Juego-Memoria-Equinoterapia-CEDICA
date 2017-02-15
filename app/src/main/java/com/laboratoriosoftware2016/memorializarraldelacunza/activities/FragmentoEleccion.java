@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Timer;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
@@ -43,6 +44,8 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 public class FragmentoEleccion extends Fragment {
     private Elemento correcto;
     private Configuracion configuracion;
+    private CountDownTimer timer;
+    private PopupWindow popupWindow;
 
     public FragmentoEleccion(){};
 
@@ -72,12 +75,20 @@ public class FragmentoEleccion extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // nose puede usar getView antes de onCreateView()
+        inicializarPopupTiempo();
+    }
+
+    @Override
+    public void onResume() {
         LinearLayout imageContainer = (LinearLayout) getView().findViewById(R.id.imagenesContainer);
+        imageContainer.removeAllViews();
         for (ImageView img : conjuntoImagenes()) {
             imageContainer.addView(img);
         }
-
+        popupWindow.dismiss();
+        configuracion.jugar();
         inicializarTitulo();
+        super.onResume();
     }
 
     public void setConfiguracion(Configuracion configuracion) {
@@ -89,6 +100,8 @@ public class FragmentoEleccion extends Fragment {
      */
     private void inicializarTitulo() {
         LinearLayout tituloContainer = (LinearLayout) getActivity().findViewById(R.id.tituloContainer);
+        TextView titulo = (TextView) getActivity().findViewById(R.id.elemento_text);
+        ImageView boton_sonido = (ImageView) getActivity().findViewById(R.id.elemento_sonido);
 
 
         //click listener sonido
@@ -101,36 +114,18 @@ public class FragmentoEleccion extends Fragment {
         };
 
         //crear texto
-        TextView tw = new AutoResizeTextView(getActivity());
         String text = this.getString(correcto.getIdString());
         text = text.substring(0, 1).toUpperCase() + text.substring(1);
-        tw.setText(text);
-
-
-        LinearLayout.LayoutParams twLP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        twLP.weight=1f;
-        twLP.gravity= Gravity.CENTER;
-        tw.setLayoutParams(twLP);
-        tw.setGravity(Gravity.CENTER);
-        tw.setSingleLine(true);
-        tw.setTextSize(Dimension.SP, 200);
+        titulo.setText(text);
 
         //click listener para mayor comodidad del usuario
         //tw.setOnClickListener(clickListener);
         //tw.setClickable(true);
 
-        tituloContainer.addView(tw);
-
 
         //crear icono sonido
-        ImageView ic_sound = new ImageView(getActivity());
-        ic_sound.setImageResource(R.mipmap.ic_sound);
-        ic_sound.setOnClickListener(clickListener);
+        boton_sonido.setOnClickListener(clickListener);
 
-        LinearLayout.LayoutParams soundLP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        soundLP.gravity=Gravity.CENTER;
-        ic_sound.setLayoutParams(soundLP);
-        tituloContainer.addView(ic_sound);
 
         if( configuracion.isTemporizado() ) {
             setearTimmer();
@@ -146,10 +141,11 @@ public class FragmentoEleccion extends Fragment {
         Integer maxSec = configuracion.getMaxSegundos()*1000;
         bar.setMax(maxSec);
         bar.setVisibility(View.VISIBLE);
-        new CountDownTimer(maxSec, 1000) {
+        if (timer!=null) timer.cancel();
+        timer = new CountDownTimer(maxSec, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                if(configuracion.isJugando()) {
+                if(getActivity() != null && configuracion.isJugando()) {
                     Integer progreso = (int) millisUntilFinished;
                     bar.setProgress(progreso);
                 }
@@ -159,30 +155,11 @@ public class FragmentoEleccion extends Fragment {
                 if(getActivity() != null && configuracion.isJugando()){
                     bar.setProgress(0);
                     configuracion.notJugando();
-                    LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
-                    View popupView = layoutInflater.inflate(R.layout.popup, null);
-                    final PopupWindow popupWindow = new PopupWindow(popupView, RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
-
-                    Button btn_Cerrar = (Button)popupView.findViewById(R.id.boton_seguir);
-                    btn_Cerrar.setOnClickListener(new Button.OnClickListener(){
-                        @Override
-                        public void onClick(View v) {
-                            popupWindow.dismiss();
-                            configuracion.jugar();
-                        }});
-
-                    Button btn_volver_inicio = (Button)popupView.findViewById(R.id.boton_inicio);
-                    btn_volver_inicio.setOnClickListener(new Button.OnClickListener(){
-
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(new Intent(v.getContext(),ActivityInicio.class));
-                        }});
-
                     popupWindow.showAtLocation(bar, Gravity.CENTER,0,0);
                 }
             }
-        }.start();
+        };
+        timer.start();
     }
 
     /**
@@ -237,7 +214,6 @@ public class FragmentoEleccion extends Fragment {
         List<Elemento> falsos = new ArrayList<Elemento>(EnumSet.allOf(Elemento.class));
         falsos.remove(correcto);
         Collections.shuffle(falsos);
-        Log.e("pref_nivel_seleccionado",configuracion.getNivel().toString());
         for (Elemento e : falsos.subList(0,configuracion.getNivel().getMaxImagenes()-1)) {
             ImageView img = crearOpcion(e);
             img.setOnClickListener(clickListenerIncorrecto);
@@ -272,5 +248,29 @@ public class FragmentoEleccion extends Fragment {
     private void colorear(int color, ImageView imagen, long milis){
         Handler h = new Handler();
         h.postDelayed(new Colorear(color, imagen),milis);
+    }
+
+    private void inicializarPopupTiempo(){
+        LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = layoutInflater.inflate(R.layout.popup, null);
+        popupWindow = new PopupWindow(popupView, RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
+
+        Button btn_Cerrar = (Button)popupWindow.getContentView().findViewById(R.id.boton_seguir);
+        btn_Cerrar.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                configuracion.jugar();
+            }});
+
+        Button btn_volver_inicio = (Button)popupWindow.getContentView().findViewById(R.id.boton_inicio);
+        btn_volver_inicio.setOnClickListener(new Button.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(),ActivityInicio.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(i);
+            }});
     }
 }
