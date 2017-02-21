@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@android:color/background_light"
     android:weightSum="1">
@@ -21,30 +21,33 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="40dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="40dp">
+            android:layout_marginTop="40dp"
+            android:minWidth="240dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/ganaste"
-                android:id="@+id/ganaste" />
+                android:id="@+id/ganaste"
+                android:gravity="center_horizontal"
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/boton_volver_jugar"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/volver_jugar" />
 
             <Button
                 android:id="@+id/boton_subir_dificultad"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/subir_dificultad"
                 android:visibility="gone" />
 
             <Button
                 android:id="@+id/boton_menu"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/volver_inicio" />
 
