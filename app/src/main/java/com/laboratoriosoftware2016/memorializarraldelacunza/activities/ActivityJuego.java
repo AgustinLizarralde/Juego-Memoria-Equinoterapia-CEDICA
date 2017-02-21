@@ -79,6 +79,8 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        TextView txt = (TextView) findViewById(R.id.toolbar_text);
+        txt.setText(getString(R.string.nivel)+": " + configuracion.getNivel().toString().toLowerCase());
     }
 
     @Override
