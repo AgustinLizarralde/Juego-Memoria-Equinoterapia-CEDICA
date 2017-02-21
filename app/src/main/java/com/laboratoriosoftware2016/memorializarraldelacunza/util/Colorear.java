@@ -19,6 +19,8 @@ public class Colorear implements Runnable {
     private Drawable backgroundOriginal;
     private ViewGroup.LayoutParams layoutParamsOriginal;
 
+    private int pb,pt,pl,pr;
+
     public Colorear(int color, ImageView imagen) {
         this.color = color;
         this.imagen = imagen;
@@ -27,6 +29,11 @@ public class Colorear implements Runnable {
         backgroundOriginal = imagen.getBackground();
         layoutParamsOriginal = imagen.getLayoutParams();
         Configuracion.getInstancia().notJugando();
+
+        pb = imagen.getPaddingBottom();
+        pt = imagen.getPaddingTop();
+        pl = imagen.getPaddingLeft();
+        pr = imagen.getPaddingRight();
 
         imagen.setScaleType(ImageView.ScaleType.CENTER_INSIDE); // Sets how the bitmap is scaled in it's container
         imagen.setBackgroundColor(color);       // Define the border color
@@ -43,7 +50,7 @@ public class Colorear implements Runnable {
             Configuracion.getInstancia().jugar();
             imagen.setScaleType(scaleTypeOriginal);
             imagen.setBackground(backgroundOriginal);
-            imagen.setPadding(0, 0, 0, 0);
+            imagen.setPadding(pl, pt, pr, pb);
             imagen.setLayoutParams(layoutParamsOriginal);
             imagen.setClickable(true);
         }
