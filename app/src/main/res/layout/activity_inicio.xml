@@ -81,6 +81,14 @@
             android:layout_height="match_parent"
             android:layout_weight="7">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/btn_star_big_on"
+                android:id="@+id/button_creditos"
+                android:layout_gravity="bottom|right"
+                android:clickable="true" />
+
         </FrameLayout>
 
     </LinearLayout>

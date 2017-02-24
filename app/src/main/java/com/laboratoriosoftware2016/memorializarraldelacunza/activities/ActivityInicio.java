@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.laboratoriosoftware2016.memorializarraldelacunza.R;
@@ -23,6 +24,7 @@ public class ActivityInicio extends AppCompatActivity {
 
         Button jugar = (Button) findViewById(R.id.button_jugar);
         Button configurar = (Button) findViewById(R.id.button_configurar);
+        ImageView creditos = (ImageView) findViewById(R.id.button_creditos);
 
         jugar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +37,13 @@ public class ActivityInicio extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(v.getContext(),ActivityConfigurar.class));
+            }
+        });
+
+        creditos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(),ActivityCreditos.class));
             }
         });
     }

@@ -46,4 +46,5 @@
     <string name="title_activity_asdfg">ASDFGActivity</string>
     <string name="nivel">Nivel</string>
     <string name="mensaje_sin_elementos_seleccionados">No hay elementos seleccionados</string>
+    <string name="creditos_desarrolladores">Esta aplicación fue hecha para el CEDICA en la materia Laboratorio de Software (2017) - Informática - UNLP, por los alumnos Agustín Lizarralde y Paula Salamone Lacunza</string>
 </resources>
