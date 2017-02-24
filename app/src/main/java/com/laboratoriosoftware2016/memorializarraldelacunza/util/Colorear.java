@@ -28,7 +28,7 @@ public class Colorear implements Runnable {
         scaleTypeOriginal = imagen.getScaleType();
         backgroundOriginal = imagen.getBackground();
         layoutParamsOriginal = imagen.getLayoutParams();
-        Configuracion.getInstancia().notJugando();
+        //Configuracion.getInstancia().notJugando();
 
         pb = imagen.getPaddingBottom();
         pt = imagen.getPaddingTop();
@@ -47,7 +47,7 @@ public class Colorear implements Runnable {
 
         //volver a lo original
         if( imagen != null) {
-            Configuracion.getInstancia().jugar();
+            //Configuracion.getInstancia().jugar();
             imagen.setScaleType(scaleTypeOriginal);
             imagen.setBackground(backgroundOriginal);
             imagen.setPadding(pl, pt, pr, pb);

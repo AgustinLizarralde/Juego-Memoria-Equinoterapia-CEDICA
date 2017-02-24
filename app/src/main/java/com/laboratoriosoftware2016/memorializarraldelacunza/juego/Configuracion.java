@@ -30,13 +30,12 @@ public final class Configuracion {
      * Al crearse la configuracion extrae las preferencias almacenadas
      * @param context contexto del cual obtener las preferencias
      */
-    public Configuracion(Context context) {
+    private Configuracion(Context context) {
         this.context = context;
-        this.preferencias = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        this.preferencias = PreferenceManager.getDefaultSharedPreferences(context);
         this.editorPreferencias = this.preferencias.edit();
         this.turno = 0;
         this.jugando = false;
-        Configuracion.setInstancia(this);
     }
 
     public Nivel getNivel() {
@@ -124,8 +123,9 @@ public final class Configuracion {
         this.jugando = true;
     }
 
-    public void proximoTurno() {
+    public Integer proximoTurno() {
         this.turno++;
+        return turno;
     }
 
     public void notJugando() {
@@ -145,8 +145,8 @@ public final class Configuracion {
         }
     }
 
-    public static void setInstancia(Configuracion config){
-        instancia = config;
+    public static void createInstancia(Context context){
+        instancia = new Configuracion(context.getApplicationContext());
     }
 
 

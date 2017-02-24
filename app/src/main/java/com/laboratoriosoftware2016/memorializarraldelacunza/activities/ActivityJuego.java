@@ -1,23 +1,15 @@
 package com.laboratoriosoftware2016.memorializarraldelacunza.activities;
 
 import android.content.Intent;
-import android.graphics.Point;
-import android.opengl.Visibility;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.PopupWindow;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,9 +17,6 @@ import com.laboratoriosoftware2016.memorializarraldelacunza.R;
 import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Configuracion;
 import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Elemento;
 import com.laboratoriosoftware2016.memorializarraldelacunza.util.Juego;
-import com.plattysoft.leonids.ParticleSystem;
-
-import static java.security.AccessController.getContext;
 
 /**
  * esta es la acivity donde se jugara
@@ -44,7 +33,8 @@ public class ActivityJuego extends android.support.v7.app.AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.configuracion = new Configuracion(this);
+        this.configuracion = Configuracion.getInstancia();
+        configuracion.setTurno(0);
         setContentView(R.layout.activity_juego_principal);
 
 

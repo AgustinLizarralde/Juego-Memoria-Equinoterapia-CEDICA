@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.laboratoriosoftware2016.memorializarraldelacunza.R;
+import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Configuracion;
 import com.laboratoriosoftware2016.memorializarraldelacunza.juego.Elemento;
 
 public class ListImageAdapter extends BaseAdapter{
@@ -115,6 +116,6 @@ public class ListImageAdapter extends BaseAdapter{
 
 
     private void guardarCambios(){
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putStringSet(context.getString(R.string.key_elementos),elementosSeleccionados).commit();
+        Configuracion.getInstancia().setElementos(elementosSeleccionados);
     }
 }

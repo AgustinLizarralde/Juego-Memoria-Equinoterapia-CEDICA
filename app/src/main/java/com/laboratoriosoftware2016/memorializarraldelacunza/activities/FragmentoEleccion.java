@@ -176,6 +176,7 @@ public class FragmentoEleccion extends Fragment {
             @Override
             public void onClick(View v) {
                 if( configuracion.isJugando() ) {
+                    configuracion.notJugando();
                     MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.correcto);
                     mp.start();
 
@@ -190,6 +191,7 @@ public class FragmentoEleccion extends Fragment {
                     Runnable run = new Runnable() {
                         @Override
                         public void run() {
+                            Configuracion.getInstancia().notJugando();
                             jp.proximaEleccion();
                         }
                     };
