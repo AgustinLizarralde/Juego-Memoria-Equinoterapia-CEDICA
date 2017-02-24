@@ -119,12 +119,14 @@ public class FragmentoEleccion extends Fragment {
         titulo.setText(text);
 
         //click listener para mayor comodidad del usuario
-        //tw.setOnClickListener(clickListener);
-        //tw.setClickable(true);
+        titulo.setOnClickListener(clickListener);
+        titulo.setClickable(true);
+
 
 
         //crear icono sonido
         boton_sonido.setOnClickListener(clickListener);
+        boton_sonido.performClick();
 
 
         if( configuracion.isTemporizado() ) {
