@@ -19,7 +19,7 @@ public enum Elemento {
     BOZAL(R.string.bozal, R.drawable.bozal, R.raw.bozal_masc, R.raw.bozal_fem),
     RIENDAS(R.string.riendas, R.drawable.riendas, R.raw.riendas_masc, R.raw.riendas_fem),
     CASCO(R.string.casco, R.drawable.casco, R.raw.casco_masc, R.raw.casco_fem),
-    ARRIADOR(R.string.arriador, R.drawable.arriador, R.raw.arriador_masc, R.raw.arriador_fem),
+    ARRIADOR(R.string.arreador, R.drawable.arreador, R.raw.arreador_masc, R.raw.arreador_fem),
     FUSTA(R.string.fusta, R.drawable.fusta, R.raw.fusta_masc, R.raw.fusta_fem),
     CUERDA(R.string.cuerda, R.drawable.cuerda, R.raw.cuerda_masc, R.raw.cuerda_fem),
     CEPILLO(R.string.cepillo, R.drawable.cepillo, R.raw.cepillo_masc, R.raw.cepillo_fem),
